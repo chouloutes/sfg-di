@@ -1,13 +1,41 @@
 package com.example.sfgdi;
 
+import com.example.sfgdi.controllers.MyController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class SfgDiApplication {
 
+	//Notes
+	//Dependency injection is dependency injection is a design pattern in
+	// which an object or function receives other objects or functions that it depends on.
+	// A form of inversion of control, dependency injection aims to separate the concerns of
+	// constructing objects and using them, leading to loosely coupled programs.
+	//
+	// Dependency injection is where a needed dependency is injected by another object / or program. It can
+	// be injected via the constructor or after via the setter. The Class being injected into has no responsibility
+	// in instantiating the object being injected that it depends on.
+	//
+	// Note: Since we have dependency injection in Spring, that doesn't mean that we will never instantiate an object
+	// ourselves ever again. There may be special cases where you don't want Spring to manage your beans in the Spring Context.
+	// So be pragmatic in what is and is not being managed in the Spring Context.
+	//
+	//
+	//Dependency Injection is a way to provide a need while guarding against doing anything else but
+	//what you need. It is like a kid who wants something from the fridge and if he gets it himself
+	//he may make a mess or leave the door open. The better way for the kid to get what he wants is from
+	// mommy or daddy who know how to get what he wants in a cleaner way.
 	public static void main(String[] args) {
-		SpringApplication.run(SfgDiApplication.class, args);
+		ApplicationContext ctx = SpringApplication.run(SfgDiApplication.class, args);
+
+		//Spring provides new instantiated object
+		//This is how dependency injection happens
+		MyController myController = (MyController) ctx.getBean("myController");
+		String greeting = myController.sayHello();
+
+		System.out.println(greeting);
 	}
 
 }
