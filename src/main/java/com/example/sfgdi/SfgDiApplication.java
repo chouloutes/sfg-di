@@ -36,9 +36,10 @@ public class SfgDiApplication {
 		//Spring provides new instantiated object
 		//This is how dependency injection happens
 		MyController myController = (MyController) ctx.getBean("myController");
-		String greeting = myController.sayHello();
 
-		System.out.println(greeting);
+
+		System.out.println("----------- Primary Bean");
+		System.out.println(myController.sayHello());
 
 		System.out.println("----------- Property");
 
