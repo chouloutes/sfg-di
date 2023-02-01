@@ -1,9 +1,6 @@
 package com.example.sfgdi;
 
-import com.example.sfgdi.controllers.ConstructorInjectedController;
-import com.example.sfgdi.controllers.MyController;
-import com.example.sfgdi.controllers.PropertyInjectedController;
-import com.example.sfgdi.controllers.SetterInjectionController;
+import com.example.sfgdi.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -32,6 +29,9 @@ public class SfgDiApplication {
 	// mommy or daddy who know how to get what he wants in a cleaner way.
 	public static void main(String[] args) {
 		ApplicationContext ctx = SpringApplication.run(SfgDiApplication.class, args);
+
+		I18nController i18nController = (I18nController) ctx.getBean("i18nController");
+		System.out.println(i18nController.sayHello());
 
 		//Spring provides new instantiated object
 		//This is how dependency injection happens
