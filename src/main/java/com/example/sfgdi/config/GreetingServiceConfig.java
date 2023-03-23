@@ -1,5 +1,7 @@
 package com.example.sfgdi.config;
 
+import com.example.sfgdi.repositories.EnglishGreetingRepository;
+import com.example.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import com.example.sfgdi.services.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,9 +15,17 @@ public class GreetingServiceConfig {
     @Primary
     PrimaryGreetingService primaryGreetingService() { return new PrimaryGreetingService(); }
 
+
+    //Spring is smart enough to create this bean first before it uses it injects it inside of following
+    //method i18nService
+    @Bean
+    EnglishGreetingRepository englishGreetingRepository() {
+        return new EnglishGreetingRepositoryImpl();
+    }
+
     @Bean
     @Profile("EN")
-    I18nEnglishGreetingService i18nService() { return new I18nEnglishGreetingService(); }
+    I18nEnglishGreetingService i18nService(EnglishGreetingRepository englishGreetingRepository) { return new I18nEnglishGreetingService(englishGreetingRepository); }
 
     @Bean("i18nService")
     @Profile("ES")
