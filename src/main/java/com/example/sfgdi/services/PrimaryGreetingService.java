@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 // than one implementation of an interface when injecting a bean default to
 // this class if a bean is not specified
 //@Qualifier annotation specified at injection point will take precedence over @Primary annotation here
-@Primary
-@Service
+//@Primary //annotations are commented out since we are moving implementation to the config class
+//@Service
 public class PrimaryGreetingService implements GreetingService{
 
     @Override
