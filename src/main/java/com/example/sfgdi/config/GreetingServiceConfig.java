@@ -53,10 +53,10 @@ public class GreetingServiceConfig {
     //things up
     //If your method name doesn't start with a lowercase letter and is not names the same as the class you
     //are trying to instantiate then spring won't pick it up and this may stop your program from compiling
-//    @Bean  //comment annotation out since we are defining this one in sfgdi-config.xml
-    ConstructorGreetingService constructorGreetingService() {
-        return new ConstructorGreetingService();
-    }
+//    @Bean  //comment annotation and method out since we are defining this one in sfgdi-config.xml
+//    ConstructorGreetingService constructorGreetingService() {
+//        return new ConstructorGreetingService();
+//    }
 
     @Bean
     PropertyInjectedGreetingService propertyInjectedGreetingService() {
