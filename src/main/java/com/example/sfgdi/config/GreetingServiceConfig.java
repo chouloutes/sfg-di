@@ -3,24 +3,36 @@ package com.example.sfgdi.config;
 import com.example.sfgdi.repositories.EnglishGreetingRepository;
 import com.example.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import com.example.sfgdi.services.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import com.springframework.pets.PetService;
+import com.springframework.pets.PetServiceFactory;
+import org.springframework.context.annotation.*;
 
+@ImportResource("classpath:sfgdi-config.xml") //we can define in any config component what xml file to find beans in
 @Configuration
 public class GreetingServiceConfig {
 
     @Bean
-    @Primary
-    PrimaryGreetingService primaryGreetingService() { return new PrimaryGreetingService(); }
-
+    PetServiceFactory petServiceFactory() {
+        return new PetServiceFactory();
+    }
 
     //Spring is smart enough to create this bean first before it uses it injects it inside of following
     //method i18nService
     @Bean
     EnglishGreetingRepository englishGreetingRepository() {
         return new EnglishGreetingRepositoryImpl();
+    }
+
+    @Profile({"dog", "default"})
+    @Bean
+    PetService dogPetService(PetServiceFactory petServiceFactory){
+        return petServiceFactory.getPetService("dog");
+    }
+
+    @Profile("cat")
+    @Bean
+    PetService catPetService(PetServiceFactory petServiceFactory){
+        return petServiceFactory.getPetService("cat");
     }
 
     @Bean
@@ -41,7 +53,7 @@ public class GreetingServiceConfig {
     //things up
     //If your method name doesn't start with a lowercase letter and is not names the same as the class you
     //are trying to instantiate then spring won't pick it up and this may stop your program from compiling
-    @Bean
+//    @Bean  //comment annotation out since we are defining this one in sfgdi-config.xml
     ConstructorGreetingService constructorGreetingService() {
         return new ConstructorGreetingService();
     }
@@ -55,4 +67,8 @@ public class GreetingServiceConfig {
     SetterInjectedGreetingService setterInjectedGreetingService() {
         return new SetterInjectedGreetingService();
     }
+
+    @Bean
+    @Primary
+    PrimaryGreetingService primaryGreetingService() { return new PrimaryGreetingService(); }
 }

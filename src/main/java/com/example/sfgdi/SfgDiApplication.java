@@ -9,8 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
 //Spring bean components that live outside of package com.example.sfgdi (where main
 // class that runs spring boot lives) won't get picked up unless we explicitly define
 // the packages to look at to scann for all of our components
-@ComponentScan(basePackages = {"com.example.sfgdi", "com.springframework.pets"})
-@SpringBootApplication
+@ComponentScan(basePackages = {"com.example.sfgdi", "com.springframework.pets"}) // We can comment this line out if all beans from the other package is defined in the config class
+@SpringBootApplication //this is also considered a configurations component
 public class SfgDiApplication {
 
 	//Notes
