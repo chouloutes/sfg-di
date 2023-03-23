@@ -1,15 +1,34 @@
 package com.example.sfgdi.config;
 
+import com.example.sfgdi.datasource.FakeDataSource;
 import com.example.sfgdi.repositories.EnglishGreetingRepository;
 import com.example.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import com.example.sfgdi.services.*;
 import com.springframework.pets.PetService;
 import com.springframework.pets.PetServiceFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 
+@PropertySource("classpath:datasource.properties")
 @ImportResource("classpath:sfgdi-config.xml") //we can define in any config component what xml file to find beans in
 @Configuration
 public class GreetingServiceConfig {
+
+    //@Value work with the class annotation @PropertySource to grab the values in the specified properties file
+    //When grabbing values from the @Value annotation be sure to put name in curly braces with the dollar sign ($)
+    // out of curly braces all in a string. Ex) @Value("${guru.username}") . Doing it like this @Value("$guru.username")
+    //with output that literal string instead of the values in the properties file.
+    @Bean
+    FakeDataSource fakeDataSource(@Value("${guru.username}")String username,
+                                  @Value("${guru.password}") String password,
+                                  @Value("${guru.jdbcurl}") String jdbcUrl){
+
+        FakeDataSource fakeDataSource = new FakeDataSource();
+        fakeDataSource.setUserName(username);
+        fakeDataSource.setPassword(password);
+        fakeDataSource.setJdbcUrl(jdbcUrl);
+        return fakeDataSource;
+    }
 
     @Bean
     PetServiceFactory petServiceFactory() {
