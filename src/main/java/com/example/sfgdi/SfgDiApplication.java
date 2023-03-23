@@ -4,7 +4,12 @@ import com.example.sfgdi.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
+//Spring bean components that live outside of package com.example.sfgdi (where main
+// class that runs spring boot lives) won't get picked up unless we explicitly define
+// the packages to look at to scann for all of our components
+@ComponentScan(basePackages = {"com.example.sfgdi", "com.springframework.pets"})
 @SpringBootApplication
 public class SfgDiApplication {
 
