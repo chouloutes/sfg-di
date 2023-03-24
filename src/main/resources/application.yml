@@ -5,12 +5,12 @@ spring:
       active:
         - dog
         - EN
-        - prod
-guru-jdbcUrl: YMLUrl
+        - dev
 
 guru:
   username: YMLUserName
   password: YMLPassword
+  jdbcUrl: YMLUrl
 
 --- #This indicates that anything after this line is a new properties file
 
@@ -22,4 +22,4 @@ spring:
 guru:
   username: YMLProdUserName
   password: YMLProdPassword
-guru-jdbcUrl: YMLProdUrl
+  jdbcUrl: YMLProdUrl

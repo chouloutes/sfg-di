@@ -18,15 +18,26 @@ public class GreetingServiceConfig {
     //When grabbing values from the @Value annotation be sure to put name in curly braces with the dollar sign ($)
     // out of curly braces all in a string. Ex) @Value("${guru.username}") . Doing it like this @Value("$guru.username")
     //with output that literal string instead of the values in the properties file.
+//    @Bean
+//    FakeDataSource fakeDataSource(@Value("${guru.username}")String username,
+//                                  @Value("${guru.password}") String password,
+//                                  @Value("${guru.jdbcUrl}") String jdbcUrl){
+//
+//        FakeDataSource fakeDataSource = new FakeDataSource();
+//        fakeDataSource.setUserName(username);
+//        fakeDataSource.setPassword(password);
+//        fakeDataSource.setJdbcUrl(jdbcUrl);
+//        return fakeDataSource;
+//    }
+
+    //refactor code above to use the db configuration bean with all the credentials
     @Bean
-    FakeDataSource fakeDataSource(@Value("${guru.username}")String username,
-                                  @Value("${guru.password}") String password,
-                                  @Value("${guru-jdbcUrl}") String jdbcUrl){
+    FakeDataSource fakeDataSource(SfgConfiguration sfgConfiguration){
 
         FakeDataSource fakeDataSource = new FakeDataSource();
-        fakeDataSource.setUserName(username);
-        fakeDataSource.setPassword(password);
-        fakeDataSource.setJdbcUrl(jdbcUrl);
+        fakeDataSource.setUserName(sfgConfiguration.getUserName());
+        fakeDataSource.setPassword(sfgConfiguration.getPassword());
+        fakeDataSource.setJdbcUrl(sfgConfiguration.getJdbcUrl());
         return fakeDataSource;
     }
 
