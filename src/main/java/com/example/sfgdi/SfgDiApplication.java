@@ -83,6 +83,12 @@ public class SfgDiApplication {
 		System.out.println(prototypeBean2.getMyScope());
 
 		System.out.println("\n----- Data source credentials from properties file example -----");
+		System.out.println("creds from properties are overridden by Environmental variables");
+		System.out.println("You can change Environmental Variables in edit configurations next to the button where we start the application at");
+		System.out.println("Environmental Variables translate to properties with all uppercase and an underscore (_) in place of any (.) or (-)");
+		System.out.println("Ex) properties file value: guru.username-stuff -> Env Variable: GURU_USERNAME_STUFF");
+		System.out.println("In same edit configurations we can override Env Variables with command line program arguments since it has high priority");
+		System.out.println("To do this just do --guru.username-stuff=PwdFromCmdLine");
 		FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
 		System.out.println(fakeDataSource.getUserName());
 		System.out.println(fakeDataSource.getPassword());

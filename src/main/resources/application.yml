@@ -1,0 +1,25 @@
+# We moved our application.properties examples inside the /test/resources folder
+spring:
+  profiles:
+#    active: dog, EN, prod #we can do it this way or how it is defined below
+      active:
+        - dog
+        - EN
+        - prod
+guru-jdbcUrl: YMLUrl
+
+guru:
+  username: YMLUserName
+  password: YMLPassword
+
+--- #This indicates that anything after this line is a new properties file
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+guru:
+  username: YMLProdUserName
+  password: YMLProdPassword
+guru-jdbcUrl: YMLProdUrl

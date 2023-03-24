@@ -1,0 +1,6 @@
+# We moved our application.properties examples inside the /test/resources folder
+guru:
+  username: YMLDEVUserName
+  password: YMLDEVPassword
+
+guru-jdbcUrl: YMLDEVUrl

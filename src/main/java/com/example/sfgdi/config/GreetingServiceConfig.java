@@ -9,7 +9,7 @@ import com.springframework.pets.PetServiceFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 
-@PropertySource("classpath:datasource.properties")
+//@PropertySource("classpath:datasource.properties")  //Spring boot automatically sets this up for us if we use the application.properties or .yml file instead of a random defined config file
 @ImportResource("classpath:sfgdi-config.xml") //we can define in any config component what xml file to find beans in
 @Configuration
 public class GreetingServiceConfig {
@@ -21,7 +21,7 @@ public class GreetingServiceConfig {
     @Bean
     FakeDataSource fakeDataSource(@Value("${guru.username}")String username,
                                   @Value("${guru.password}") String password,
-                                  @Value("${guru.jdbcurl}") String jdbcUrl){
+                                  @Value("${guru-jdbcUrl}") String jdbcUrl){
 
         FakeDataSource fakeDataSource = new FakeDataSource();
         fakeDataSource.setUserName(username);
