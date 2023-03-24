@@ -7,10 +7,12 @@ import com.example.sfgdi.services.*;
 import com.springframework.pets.PetService;
 import com.springframework.pets.PetServiceFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 
 //@PropertySource("classpath:datasource.properties")  //Spring boot automatically sets this up for us if we use the application.properties or .yml file instead of a random defined config file
 @ImportResource("classpath:sfgdi-config.xml") //we can define in any config component what xml file to find beans in
+@EnableConfigurationProperties(SfgConstructorConfig.class)
 @Configuration
 public class GreetingServiceConfig {
 
@@ -30,14 +32,24 @@ public class GreetingServiceConfig {
 //        return fakeDataSource;
 //    }
 
-    //refactor code above to use the db configuration bean with all the credentials
+    //refactor code above to use the db configuration bean with all the credentials already added in that class via properties
+//    @Bean
+//    FakeDataSource fakeDataSource(SfgConfiguration sfgConfiguration){
+//
+//        FakeDataSource fakeDataSource = new FakeDataSource();
+//        fakeDataSource.setUserName(sfgConfiguration.getUserName());
+//        fakeDataSource.setPassword(sfgConfiguration.getPassword());
+//        fakeDataSource.setJdbcUrl(sfgConfiguration.getJdbcUrl());
+//        return fakeDataSource;
+//    }
+
     @Bean
-    FakeDataSource fakeDataSource(SfgConfiguration sfgConfiguration){
+    FakeDataSource fakeDataSource(SfgConstructorConfig sfgConstructorConfig){
 
         FakeDataSource fakeDataSource = new FakeDataSource();
-        fakeDataSource.setUserName(sfgConfiguration.getUserName());
-        fakeDataSource.setPassword(sfgConfiguration.getPassword());
-        fakeDataSource.setJdbcUrl(sfgConfiguration.getJdbcUrl());
+        fakeDataSource.setUserName(sfgConstructorConfig.getUserName());
+        fakeDataSource.setPassword(sfgConstructorConfig.getPassword());
+        fakeDataSource.setJdbcUrl(sfgConstructorConfig.getJdbcUrl());
         return fakeDataSource;
     }
 

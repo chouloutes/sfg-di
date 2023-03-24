@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConfigurationProperties(prefix = "guru") // this prefix guru is used to grab the corresponding property values and map them to the class variables
+@ConfigurationProperties("guru") // this prefix guru is used to grab the corresponding property values and map them to the class variables
 public class SfgConfiguration {
 
     private String userName;
